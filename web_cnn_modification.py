@@ -9,20 +9,20 @@ import data_helpers
 from text_cnn import TextCNN
 from tensorflow.contrib import learn
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask(__name__)
 
+@app.route("/hello")
+def hello():
+    return "No way!!!!!!!"
 
-def binary_test(review):
-    score = 1
-    # 0 or 1, i.e, negative or positive
-    return score
-
-def multiple_test(review):
+@app.route("/")
+def multiple_test():
     score = 1
     # 1, 2, 3, 4 or 5
     tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
     #I don't know.. the path... pleas help me...
-    tf.flags.DEFINE_string("checkpoint_dir", "./runs/1531944623/checkpoints", "Checkpoint directory from training run") 
+    # tf.flags.DEFINE_string("checkpoint_dir", "./runs/1531944623/checkpoints", "Checkpoint directory from training run")
+    tf.flags.DEFINE_string("checkpoint_dir", "./meta_data", "Checkpoint directory from training run")
     tf.flags.DEFINE_boolean("eval_train", False, "Evaluate on all training data")
 
     # Misc Parameters
@@ -31,20 +31,25 @@ def multiple_test(review):
 
     FLAGS = tf.flags.FLAGS
     FLAGS._parse_flags()
+    review = "The phone was great but it had gotten old so it was time for a replacement.it was great while it lasted."
     
     s = review
+     
     x_raw = [s]
     vocab_path = os.path.join(FLAGS.checkpoint_dir, "vocab")
     vocab_processor = learn.preprocessing.VocabularyProcessor.restore(vocab_path)
+    print("Check-1")
     x_test = np.array(list(vocab_processor.transform(x_raw)))
     
     checkpoint_file = tf.train.latest_checkpoint(FLAGS.checkpoint_dir)
     graph = tf.Graph()
+    print("Check0")
     with graph.as_default():
         session_conf = tf.ConfigProto(
           allow_soft_placement=FLAGS.allow_soft_placement,
           log_device_placement=FLAGS.log_device_placement)
         sess = tf.Session(config=session_conf)
+        print("Check1")
         with sess.as_default():
             # Load the saved meta graph and restore variables
             saver = tf.train.import_meta_graph("{}.meta".format(checkpoint_file))
@@ -63,12 +68,12 @@ def multiple_test(review):
 
             # Collect the predictions here
             all_predictions = []
-
+            print("Check2")
             for x_test_batch in batches:
                 batch_predictions = sess.run(predictions, {input_x: x_test_batch, dropout_keep_prob: 1.0})
                 all_predictions = np.concatenate([all_predictions, batch_predictions])
 
-            all_predictions = all_predictions.astype('int32')
+            all_predictions = all_predictions.astype(int)
             
             #I don't know.. to print..u...
             
@@ -77,40 +82,7 @@ def multiple_test(review):
 
             score = all_predictions[0]
             
-    return score
-
-@app.route('/')
-def homepage():
-    title = "Epic Tutorials"
-    try:
-        return render_template("example_bootstrap.html")
-    except Exception as e:
-        return "Exception occur " + str(e)
-
-@app.route('/hello')
-def hello_world():
-    return 'Hello World'
-
-@app.route('/index')
-def index_page():
-    return render_template("index.html")
-
-@app.route('/result')
-def result_page():
-    return render_template("result.html")
-
-@app.route('/prediction', methods=['GET'])
-def prediction():
-    binary_choice = request.args.get('happy')
-    review = request.args.get('srch-term')
-
-    if binary_choice == 'Y':
-        score = binary_test(review)
-    elif binary_choice == 'N':
-        score = multiple_test(review)
-    else:
-        score = "error"
-    return render_template("result.html")
+    return str(score)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000', debug=True)
+    app.run()
