@@ -8,3 +8,6 @@ We tested the post-learning using LSTM, which is a type of RNN known as a repres
 Next, we implemented multiple text classification using CNN, which is mainly used for image processing. 
 In conclusion, we have tested the possibility of how much performance can be expressed by text classification using RNN and CNN, which are representative algorithms of deep learning, and how much of the learning result, in this project .
 Especially, in order to process texts of CNN that performs image processing, the order of appearance of words and expressions is reflected in learning by preserving local information of sentences.
+
+#Reference Data
+- https://www.kaggle.com/PromptCloudHQ/amazon-reviews-unlocked-mobile-phones/kernels
