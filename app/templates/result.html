@@ -1,0 +1,149 @@
+<!doctype html>
+
+<script>
+function clearText(field){
+if(field.defaultValue == field.value) field.value = '';
+else if(field.value == '') field.value = field.defaultValue;
+}
+
+function goBack() {
+    window.history.back();
+}
+
+function makeStars(num){
+    var stars=document.getElementById('stars');
+    for (var i = 0; i < num; i++) {
+      stars.innerHTML=stars.innerHTML+'<img src="star.png" alt="Amazon" width="50" height="50">'
+    }
+    for (var i=num;i<5;i++){
+      stars.innerHTML=stars.innerHTML+'<img src="empty_star.png" alt="Amazon" width="50" height="50">'
+    }
+}
+
+
+</script>
+
+<meta charset="utf-8">
+<html>
+   <head>
+      <!-- 부트스트랩 임포트  -->
+      <link rel="stylesheet" type="text/css" href="../css/mainpage.css?ver=2">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+          <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <!-- Latest compiled JavaScript -->
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <!-- mobile reaction-->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- 글씨체 임포트 -->
+      <style>
+
+      @import url(http://fonts.googleapis.com/earlyaccess/kopubbatang.css);
+      @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+      @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+      body {background-color: beige;}
+
+      h1{
+        font-family: 'Comic Sans MS', cursive;
+        font-size:2.8em;
+        font-weight:bold;
+        margin-bottom:0;
+        color:#37474F;
+      }
+      .inputtxt{
+        font-family: 'Comic Sans MS', cursive;
+        font-size:4em !important;
+        color:#37474F;
+        padding-left : 0.5em;
+        border-width: 1.7px;
+        border-color:black;
+      }
+      .row{
+        margin:auto;
+      }
+
+      .imgbtn{
+        width:150px;
+        height: 150px;
+        background-color: Transparent;
+        background-repeat:no-repeat;
+        border: none;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;
+      }
+
+      h2{
+        margin-top:0;
+        font-family: 'Nanum Pen Script', cursive;
+        font-size:1.7em;
+        color:gray;
+      }
+
+      .add-on .input-group-btn > .btn {
+        border-left-width:0;left:-2px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      }
+      /* stop the glowing blue shadow */
+      .add-on .form-control:focus {
+       box-shadow:none;
+       -webkit-box-shadow:none;
+       border-color:#cccccc;
+      }
+      .form-control{width:20%}
+      .navbar-nav > li > a {
+        border-right: 1px solid #ddd;
+        padding-bottom: 15px;
+        padding-top: 15px;
+      }
+      .navbar-nav:last-child{ border-right:0}
+      .form-control {
+        padding: 20px 12px;
+        font-size: 23px;
+      }
+
+      .btn{
+        font-size: 20px;
+      }
+
+      .back{
+        width:125px;
+      }
+
+      img{
+        margin:5px;
+      }
+
+  		</style>
+
+   </head>
+   <body>
+      <div class="containe text-center">
+
+        <br><br><br><br>
+          <div class="row heading">
+              <img src="amazon.png" alt="Amazon" width="170" height="170">
+              <br>
+              <h1>Your Review Rating</h1>
+              <br>
+              <div id="stars">
+                <script>
+                  makeStars(5)
+                </script>
+              </div>
+              <br><br><br>
+              <form class="navbar-form" role="search">
+                <button class="imgbtn">
+                  <img src="back.png" onclick="goBack()" class="back" />
+                </button>
+              </form>
+              <h1>Try Again!</h1>
+          </div>
+        </div>
+   </body>
+</html>

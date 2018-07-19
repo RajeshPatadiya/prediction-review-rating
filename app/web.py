@@ -2,7 +2,8 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
 
 @app.route('/')
 def homepage():
@@ -16,9 +17,14 @@ def homepage():
 def hello_world():
     return 'Hello World'
 
-@app.route('/a')
-def a_page():
-    return render_template("a.html")
+@app.route('/index')
+def index_page():
+    return render_template("index.html")
+
+@app.route('/result')
+def result_page():
+    return render_template("result.html")
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000', debug=True)
