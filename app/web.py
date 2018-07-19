@@ -5,6 +5,16 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__, static_url_path='/static')
 
 
+def binary_test(review):
+
+    # 0 or 1, i.e, negative or positive
+    return score
+
+def multiple_test(review):
+
+    # 1, 2, 3, 4 or 5
+    return score
+
 @app.route('/')
 def homepage():
     title = "Epic Tutorials"
@@ -25,9 +35,17 @@ def index_page():
 def result_page():
     return render_template("result.html")
 
-@app.route('/prediction')
+@app.route('/prediction', methods=['GET'])
 def prediction():
-    print("hello")
+    happy = request.args.get('happy')
+    term = request.args.get('srch-term')
+
+    if happy == 'Y':
+        score = binary_test(term)
+    elif happy == 'N':
+        score = multiple_test(term)
+    else:
+        score = "error"
     return render_template("result.html")
 
 if __name__ == '__main__':
