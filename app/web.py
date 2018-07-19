@@ -28,7 +28,7 @@ def result_page():
 @app.route('/prediction')
 def prediction():
     print("hello")
-    return 'hello'
+    return render_template("result.html")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000', debug=True)

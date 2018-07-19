@@ -1,204 +1,227 @@
 <!doctype html>
 
 <script>
-  function clearText(field){
-  if(field.defaultValue == field.value) field.value = '';
-  else if(field.value == '') field.value = field.defaultValue;
+function clearText(field){
+    if(field.defaultValue == field.value) field.value = '';
+    else if(field.value == '') field.value = field.defaultValue;
+}
+
+function myFunction() {
+    var str = document.getElementById('search').value
+    window.alert(str);
+
+
+    $.ajax({
+        url: '/prediction',
+        method: "GET",
+//        data: str,
+            //JSON.stringify(personInfo),
+//        contentType: 'application/json; charset=utf-8',
+//        dataType: 'json',
+//            async: false,
+        success: function(result) {
+            var data=3;
+//                    location.href="result.html?rating="+data;
+            window.alert("success")
+            window.alert(str)
+        },
+        error: function(e) {
+            var data=3;
+//                    location.href="result.html?rating="+data;
+//                    document.getElementById("frame").src="result.html";
+//            window.alert("error")
+        }
+    });
 }
 
 
-    function myFunction() {
-        var str = document.getElementById('Enter Your Review').value
-        // window.alert(data);
-        alert(str)
-        doWork(str)
-    }
+function doWork(str) {
+    // ajax the JSON to the server
+    // $.get( "/getmethod/data" );
+    // stop link reloading the page
 
-    function doWork(str) {
-    	// ajax the JSON to the server
-      // $.get( "/getmethod/data" );
-    	// stop link reloading the page
-
-      $.ajax({
-        url: 'http://ec2-13-125-60-101.ap-northeast-2.compute.amazonaws.com:5000/prediction/',
+    $.ajax({
+        url: '127.0.0.1:5000/prediction',
         type: 'POST',
-        data: "1"+str, //JSON.stringify(personInfo),
-        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(personInfo),
+        contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         async: false,
         success: function(data) {
-            alert('Submit Complete!');
+            // alert('Submit Complete!');
             // getResult(data);
             //Result=data;
         },
         error: function(e) {
-          alert('Submit Error!');
-          Result = {
+            // alert('Submit Error!');
+            Result = {
                 "윤선희" : 0.8,
                 "홍진" : 0.7,
                 "권도경" : 0.5
-               }
-          document.getElementById("frame").src="result.html";
+            }
+            document.getElementById("frame").src="result.html";
         }
     });
-
-     event.preventDefault();
-    }
+}
 
 </script>
 
 <meta charset="utf-8">
 <html>
-   <head>
-      <!-- 부트스트랩 임포트  -->
-<!--      <link rel="stylesheet" type="text/css"
-    href="../css/mainpage.css?ver=2"> -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-          <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-      <!-- jQuery library -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-      <!-- Latest compiled JavaScript -->
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-      <!-- mobile reaction-->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-      <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-      <!------ Include the above in your HEAD tag ---------->
-      <!-- 글씨체 임포트 -->
-      <style>
+    <head>
+        <!-- 부트스트랩 임포트  -->
+        <!--      <link rel="stylesheet" type="text/css"
+            href="../css/mainpage.css?ver=2"> -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+            <!-- jQuery library -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <!-- Latest compiled JavaScript -->
+            <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+            <!-- mobile reaction-->
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+            <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+            <!------ Include the above in your HEAD tag ---------->
+            <!-- 글씨체 임포트 -->
+            <style>
 
-      @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
-      @import url(http://fonts.googleapis.com/earlyaccess/kopubbatang.css);
-      @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-      @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/kopubbatang.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 
-      h1{
-        font-family: 'Comic Sans MS', cursive;
-        font-size:4em;
-        font-weight:bold;
-        margin-bottom:0;
-        color:#37474F;
-      }
+h1{
+    font-family: 'Comic Sans MS', cursive;
+    font-size:4em;
+    font-weight:bold;
+    margin-bottom:0;
+    color:#37474F;
+}
       .inputtxt{
-        font-family: 'Comic Sans MS', cursive;
-        font-size:4em !important;
-        color:#37474F;
-        padding-left : 0.5em;
-        border-width: 1.7px;
-        border-color:black;
+          font-family: 'Comic Sans MS', cursive;
+          font-size:4em !important;
+          color:#37474F;
+              padding-left : 0.5em;
+          border-width: 1.7px;
+          border-color:black;
       }
 
       .row{
-        margin:auto;
+          margin:auto;
       }
 
       .imgbtn{
-        width:50px;
+          width:50px;
       }
 
       h2{
-        margin-top:0;
-        font-family: 'Nanum Pen Script', cursive;
-        font-size:3em;
-        color:gray;
+          margin-top:0;
+          font-family: 'Nanum Pen Script', cursive;
+          font-size:3em;
+          color:gray;
       }
 
       .add-on .input-group-btn > .btn {
-        border-left-width:0;left:-2px;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          border-left-width:0;left:-2px;
+          -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
       }
       /* stop the glowing blue shadow */
       .add-on .form-control:focus {
-       box-shadow:none;
-       -webkit-box-shadow:none;
-       border-color:#cccccc;
+          box-shadow:none;
+          -webkit-box-shadow:none;
+          border-color:#cccccc;
       }
       .form-control{width:20%}
       .navbar-nav > li > a {
-        border-right: 1px solid #ddd;
-        padding-bottom: 15px;
-        padding-top: 15px;
+          border-right: 1px solid #ddd;
+          padding-bottom: 15px;
+          padding-top: 15px;
       }
       .navbar-nav:last-child{ border-right:0}
 
       .form-control {
-        padding: 20px 12px;
-        font-size: 23px;
+          padding: 20px 12px;
+          font-size: 23px;
       }
 
       .btn{
-        font-size: 20px;
+          font-size: 20px;
       }
 
       #radioBtn .notActive{
-    color: #3276b1;
-    background-color: #fff;
-}
+          color: #3276b1;
+          background-color: #fff;
+      }
 
 
-            body {background-color: beige;}
+      body {background-color: beige;}
 
 
-  		</style>
+            </style>
 
-   </head>
-   <body>
-      <div class="containe text-center">
+    </head>
+    <body>
+        <div class="containe text-center">
 
-        <br><br><br><br><br><br>
-          <div class="row heading">
-              <img src="/static/amazon.png" alt="Amazon" width="240" height="240">
-              <br>
-              <h1>Convert Review To Rating</h1>
-              <br><br>
-              <form class="navbar-form" role="search">
-              <!-- Default unchecked -->
-        				<div id="radioBtn" class="btn-group">
-        					<a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="Y"> Positive / Negative </a>
-        					<a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="N">    Number Rating    </a>
-        				<input type="hidden" name="happy" id="happy">
-        	     </div>
-                <br><br><br>
-                <div class="input-group add-on inputtxt">
-                  <input class="form-control" id="search" size="40" value="Enter Your Review" onFocus="clearText(this)"
-                               onBlur="clearText(this)"
-                               placeholder="Enter Your Review"
-                               name="srch-term" id="srch-term" type="text">
-                  <div class="input-group-btn">
-                    <button onclick="myFunction()" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                  </div>
-                </div>
-              </form>
-              <br><br>
-              <!--
-              <div class="row">
-                <input class="inputtxt" name="review" size="20" type="text" value="Enter Your Review" onFocus="clearText(this)" onBlur="clearText(this)">
-                <input class="inputtxt" name="review" size="20" type="text" value="Enter Your Review" onFocus="clearText(this)" onBlur="clearText(this)">
-                <input class="imgbtn" type="image" src="search.png" alt="Search" style="padding-top: 1em">
-              </div>
-              -->
-          </div>
+            <br><br><br><br><br><br>
+            <div class="row heading">
+                <img src="/static/amazon.png" alt="Amazon" width="240" height="240">
+                <br>
+                <h1>Convert Review To Rating</h1>
+                <br><br>
+                <form class="navbar-form" method="get" action="/prediction">
+                    <!-- Default unchecked -->
+                    <div id="radioBtn" class="btn-group">
+                        <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="Y"> Positive / Negative </a>
+                        <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="N">    Number Rating    </a>
+                        <input type="hidden" name="happy" id="happy" value="Y">
+                    </div>
+                    <br><br><br>
+                    <div class="input-group add-on inputtxt">
+                        <input class="form-control" id="search" size="40" value="Enter Your Review" onFocus="clearText(this)"
+                                                                                                    onBlur="clearText(this)"
+                                                                                                    placeholder="Enter Your Review"
+                                                                                                    name="srch-term" id="srch-term" type="text">
+                        <div class="input-group-btn">
+<!--                            <button onclick="myFunction()"
+    class="btn-default"><i class="glyphicon-search"></i></button> -->
+                            <button id="hi" class="btn-default">
+                                <i class="glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+                <br><br>
+                <!--
+                    <div class="row">
+                    <input class="inputtxt" name="review" size="20" type="text" value="Enter Your Review" onFocus="clearText(this)" onBlur="clearText(this)">
+                    <input class="inputtxt" name="review" size="20" type="text" value="Enter Your Review" onFocus="clearText(this)" onBlur="clearText(this)">
+                    <input class="imgbtn" type="image" src="search.png" alt="Search" style="padding-top: 1em">
+                    </div>
+                -->
+            </div>
         </div>
 
 
         <script>
 
-        $('#radioBtn a').on('click', function(){
-            var sel = $(this).data('title');
-            var tog = $(this).data('toggle');
-            $('#'+tog).prop('value', sel);
+$('#radioBtn a').on('click', function(){
+    var sel = $(this).data('title');
+    var tog = $(this).data('toggle');
+    $('#'+tog).prop('value', sel);
 
-            $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
-            $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
-        })
+    $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+    $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+})
 
 
         </script>
 
 
 
-   </body>
+    </body>
 </html>
+
