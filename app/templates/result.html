@@ -5,22 +5,9 @@ function clearText(field){
 if(field.defaultValue == field.value) field.value = '';
 else if(field.value == '') field.value = field.defaultValue;
 }
-/*
-function goBack() {
-    window.history.back();
-}
-*/
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-    function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
+
 function makeStars(num){
     var stars=document.getElementById('stars');
-    alert(num)
     for (var i = 0; i < num; i++) {
       stars.innerHTML=stars.innerHTML+'<img src="/static/star.png" alt="Amazon" width="50" height="50">'
     }
@@ -28,17 +15,11 @@ function makeStars(num){
       stars.innerHTML=stars.innerHTML+'<img src="/static/empty_star.png" alt="Amazon" width="50" height="50">'
     }
 }
-
-
 </script>
 
 <meta charset="utf-8">
 <html>
    <head>
-      <!-- 부트스트랩 임포트  -->
-      <!--
-      <link rel="stylesheet" type="text/css" href="../css/mainpage.css?ver=2">
-      -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
           <!-- Latest compiled and minified CSS -->
       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -49,7 +30,6 @@ function makeStars(num){
       <!-- mobile reaction-->
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- 글씨체 임포트 -->
       <style>
 
       @import url(http://fonts.googleapis.com/earlyaccess/kopubbatang.css);
@@ -157,10 +137,6 @@ function makeStars(num){
             <a href="/index">
                 <img src="/static/back.png" class="back imgbtn">
             </a>
-<!--                <button class="imgbtn">
-                  <img src="/static/back.png" href="/index" class="back" />
-                </button>
--->
               </form>
               <h1>Try Again!</h1>
           </div>

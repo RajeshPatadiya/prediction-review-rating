@@ -5,73 +5,10 @@ function clearText(field){
     if(field.defaultValue == field.value) field.value = '';
     else if(field.value == '') field.value = field.defaultValue;
 }
-
-function myFunction() {
-    var str = document.getElementById('search').value
-    window.alert(str);
-
-
-    $.ajax({
-        url: '/prediction',
-        method: "GET",
-//        data: str,
-            //JSON.stringify(personInfo),
-//        contentType: 'application/json; charset=utf-8',
-//        dataType: 'json',
-//            async: false,
-        success: function(result) {
-            var data=3;
-//                    location.href="result.html?rating="+data;
-            window.alert("success")
-            window.alert(str)
-        },
-        error: function(e) {
-            var data=3;
-//                    location.href="result.html?rating="+data;
-//                    document.getElementById("frame").src="result.html";
-//            window.alert("error")
-        }
-    });
-}
-
-
-function doWork(str) {
-    // ajax the JSON to the server
-    // $.get( "/getmethod/data" );
-    // stop link reloading the page
-
-    $.ajax({
-        url: '127.0.0.1:5000/prediction',
-        type: 'PUT',
-        data: JSON.stringify(personInfo),
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        async: false,
-        success: function(data) {
-            // alert('Submit Complete!');
-            // getResult(data);
-            //Result=data;
-        },
-        error: function(e) {
-            // alert('Submit Error!');
-            Result = {
-                "윤선희" : 0.8,
-                "홍진" : 0.7,
-                "권도경" : 0.5
-            }
-            document.getElementById("frame").src="result.html";
-        }
-    });
-}
-
 </script>
-
 <meta charset="utf-8">
 <html>
     <head>
-        <!-- 부트스트랩 임포트  -->
-        <!--      <link rel="stylesheet" type="text/css"
-            href="../css/mainpage.css?ver=2"> -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
             <!-- Latest compiled and minified CSS -->
             <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -85,7 +22,6 @@ function doWork(str) {
             <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
             <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
             <!------ Include the above in your HEAD tag ---------->
-            <!-- 글씨체 임포트 -->
             <style>
 
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
@@ -189,21 +125,12 @@ h1{
                                                                                                     placeholder="Enter Your Review"
                                                                                                     name="srch-term" id="srch-term" type="text">
                         <div class="input-group-btn">
-<!--                            <button onclick="myFunction()"
-    class="btn-default"><i class="glyphicon-search"></i></button> -->
                             <button id="hi" class="btn-default">
                                 <i class="glyphicon-search"></i></button>
                         </div>
                     </div>
                 </form>
                 <br><br>
-                <!--
-                    <div class="row">
-                    <input class="inputtxt" name="review" size="20" type="text" value="Enter Your Review" onFocus="clearText(this)" onBlur="clearText(this)">
-                    <input class="inputtxt" name="review" size="20" type="text" value="Enter Your Review" onFocus="clearText(this)" onBlur="clearText(this)">
-                    <input class="imgbtn" type="image" src="search.png" alt="Search" style="padding-top: 1em">
-                    </div>
-                -->
             </div>
         </div>
 
@@ -218,12 +145,7 @@ $('#radioBtn a').on('click', function(){
     $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
     $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
 })
-
-
         </script>
-
-
-
     </body>
 </html>
 
