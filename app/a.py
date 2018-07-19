@@ -1,6 +1,4 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
-from werkzeug.utils import secure_filename
 import tensorflow as tf
 import numpy as np
 import time
@@ -9,18 +7,11 @@ import data_helpers
 from text_cnn import TextCNN
 from tensorflow.contrib import learn
 
-app = Flask(__name__, static_url_path='/static')
-
-
-def binary_test(review):
-    score = 1
-    # 0 or 1, i.e, negative or positive
-    return score
 
 def multiple_test(review):
     tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
     #I don't know.. the path... pleas help me...
-    tf.flags.DEFINE_string("checkpoint_dir", "model_data", "Checkpoint directory from training run") 
+    tf.flags.DEFINE_string("checkpoint_dir", "./static/model_data", "Checkpoint directory from training run") 
     tf.flags.DEFINE_boolean("eval_train", False, "Evaluate on all training data")
 
     # Misc Parameters
@@ -32,7 +23,7 @@ def multiple_test(review):
     
     s = review
     x_raw = [s]
-    vocab_path = os.path.join(FLAGS.checkpoint_dir, "vocab")
+    vocab_path = os.path.join(os.path.dirname(FLAGS.checkpoint_dir), "vocab")
     vocab_processor = learn.preprocessing.VocabularyProcessor.restore(vocab_path)
     x_test = np.array(list(vocab_processor.transform(x_raw)))
     
@@ -66,50 +57,4 @@ def multiple_test(review):
                 batch_predictions = sess.run(predictions, {input_x: x_test_batch, dropout_keep_prob: 1.0})
                 all_predictions = np.concatenate([all_predictions, batch_predictions])
 
-            all_predictions = all_predictions.astype('int32')
-            
-            #I don't know.. to print..u...
-            
-            print("Predicts : ", all_predictions)
-            print("Prediction Type", type(all_predictions[0]))
-
-            score = all_predictions[0]
- 
-    # 1, 2, 3, 4 or 5
-    return score
-
-@app.route('/')
-def homepage():
-    title = "Epic Tutorials"
-    try:
-        return render_template("example_bootstrap.html")
-    except Exception as e:
-        return "Exception occur " + str(e)
-
-@app.route('/hello')
-def hello_world():
-    return 'Hello World'
-
-@app.route('/index')
-def index_page():
-    return render_template("index.html")
-
-@app.route('/result')
-def result_page():
-    return render_template("result.html")
-
-@app.route('/prediction', methods=['GET'])
-def prediction():
-    binary_choice = request.args.get('happy')
-    review = request.args.get('srch-term')
-
-    if binary_choice == 'Y':
-        score = binary_test(review)
-    elif binary_choice == 'N':
-        score = multiple_test(review)
-    else:
-        score = "error"
-    return render_template("result.html")
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000', debug=True)
+multiple_test("The phone was great but it had gotten old so it was time for a replacement.it was great while it lasted.")
