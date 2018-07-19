@@ -6,12 +6,12 @@ app = Flask(__name__, static_url_path='/static')
 
 
 def binary_test(review):
-
+    score = 1
     # 0 or 1, i.e, negative or positive
     return score
 
 def multiple_test(review):
-
+    score = 1
     # 1, 2, 3, 4 or 5
     return score
 
@@ -37,13 +37,13 @@ def result_page():
 
 @app.route('/prediction', methods=['GET'])
 def prediction():
-    happy = request.args.get('happy')
-    term = request.args.get('srch-term')
+    binary_choice = request.args.get('happy')
+    review = request.args.get('srch-term')
 
-    if happy == 'Y':
-        score = binary_test(term)
-    elif happy == 'N':
-        score = multiple_test(term)
+    if binary_choice == 'Y':
+        score = binary_test(review)
+    elif binary_choice == 'N':
+        score = multiple_test(review)
     else:
         score = "error"
     return render_template("result.html")
