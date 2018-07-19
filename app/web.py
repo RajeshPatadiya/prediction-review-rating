@@ -9,15 +9,24 @@ import data_helpers
 from text_cnn import TextCNN
 from tensorflow.contrib import learn
 
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing import sequence
+from keras.models import load_model
+
+import pickle
+
+import re
+import nltk
+
+from nltk.corpus import stopwords
+from nltk.stem.porter import PorterStemmer
+english_stemmer=nltk.stem.SnowballStemmer('english')
+
 app = Flask(__name__, static_url_path='/static')
 
-
-def binary_test(review):
-    score = 1
-    # 0 or 1, i.e, negative or positive
-    return score
-
-def multiple_test(review):
+@app.before_first_request
+def setting():
+    # set tensorflow flags
     tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
     tf.flags.DEFINE_string("checkpoint_dir", './meta_data', "Checkpoint directory from training run") 
     tf.flags.DEFINE_boolean("eval_train", False, "Evaluate on all training data")
@@ -25,6 +34,58 @@ def multiple_test(review):
     # Misc Parameters
     tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
     tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on devices")
+
+    global model
+    model = load_model('./review.h5')
+    global graph
+    graph = tf.get_default_graph()
+
+def review_to_wordlist( review, remove_stopwords=True):
+    # Data Pre-processing
+    # Function to convert a document to a sequence of words,
+    # optionally removing stop words.  Returns a list of words.
+
+    #
+    # 1. Remove non-letters
+    review_text = re.sub("[^a-zA-Z]"," ", review)
+    #
+    # 2. Convert words to lower case and split them
+    words = review_text.lower().split()
+    #
+    # 3. Optionally remove stop words (True by default)
+    if remove_stopwords:
+        stops = set(stopwords.words("english"))
+        words = [w for w in words if not w in stops]
+
+    b=[]
+    stemmer = english_stemmer #PorterStemmer()
+    for word in words:
+        b.append(stemmer.stem(word))
+
+    # 4. Return a list of words
+    return(b)
+
+def binary_test(review):
+    # loading
+    with open('tokenizer.pickle', 'rb') as handle:
+        tokenizer = pickle.load(handle)
+
+    # fit "a review" to model input
+    review_word_list = review_to_wordlist( review )
+    sequences_test = tokenizer.texts_to_sequences(review_word_list)
+
+    X_review = sequence.pad_sequences(sequences_test, maxlen=80)
+
+    with graph.as_default():
+        y_prob = model.predict(X_review)
+        y_class = np.argmax(y_prob, axis=1)
+        print('binary test\'s y_prob : ', y_prob)
+        score = y_class[0]
+
+    # 0 or 1, i.e, negative or positive
+    return score
+
+def multiple_test(review):
 
     FLAGS = tf.flags.FLAGS
 #    FLAGS._parse_flags()
@@ -108,8 +169,11 @@ def prediction():
     elif binary_choice == 'N':
         score = multiple_test(review)
     else:
-        score = "error"
-    return render_template("result.html")
+        score = -1
+
+    print('score : ', score)
+    return render_template("result.html", score=score)
 
 if __name__ == '__main__':
+#    model = load_model('./review.h5')
     app.run(host='0.0.0.0', port='5000', debug=True)

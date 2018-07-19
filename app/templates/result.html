@@ -10,8 +10,17 @@ function goBack() {
     window.history.back();
 }
 */
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+    function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
 function makeStars(num){
     var stars=document.getElementById('stars');
+    alert(num)
     for (var i = 0; i < num; i++) {
       stars.innerHTML=stars.innerHTML+'<img src="/static/star.png" alt="Amazon" width="50" height="50">'
     }
@@ -135,7 +144,7 @@ function makeStars(num){
               <br>
               <div id="stars">
                 <script>
-                  makeStars(5)
+                    makeStars({{ score }})
                 </script>
               </div>
               <br><br><br>

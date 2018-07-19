@@ -42,7 +42,7 @@ function doWork(str) {
 
     $.ajax({
         url: '127.0.0.1:5000/prediction',
-        type: 'POST',
+        type: 'PUT',
         data: JSON.stringify(personInfo),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
