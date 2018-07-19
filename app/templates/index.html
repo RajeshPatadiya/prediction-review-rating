@@ -8,9 +8,10 @@
 
 
     function myFunction() {
-      var str = document.getElementById('search').value
-      // window.alert(data);
-      doWork(str)
+        var str = document.getElementById('Enter Your Review').value
+        // window.alert(data);
+        alert(str)
+        doWork(str)
     }
 
     function doWork(str) {
@@ -19,19 +20,19 @@
     	// stop link reloading the page
 
       $.ajax({
-        url: 'http://54.215.240.141:5000/prediction',
-        type: 'GET',
-        data: "1"+str //JSON.stringify(personInfo),
-        contentType: 'application/json; charset=utf-8',
+        url: 'http://ec2-13-125-60-101.ap-northeast-2.compute.amazonaws.com:5000/prediction/',
+        type: 'POST',
+        data: "1"+str, //JSON.stringify(personInfo),
+        contentType: "application/json; charset=utf-8",
         dataType: 'json',
         async: false,
         success: function(data) {
-            // alert('Submit Complete!');
+            alert('Submit Complete!');
             // getResult(data);
             //Result=data;
         },
         error: function(e) {
-          // alert('Submit Error!');
+          alert('Submit Error!');
           Result = {
                 "윤선희" : 0.8,
                 "홍진" : 0.7,
@@ -50,7 +51,8 @@
 <html>
    <head>
       <!-- 부트스트랩 임포트  -->
-      <link rel="stylesheet" type="text/css" href="../css/mainpage.css?ver=2">
+<!--      <link rel="stylesheet" type="text/css"
+    href="../css/mainpage.css?ver=2"> -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
           <!-- Latest compiled and minified CSS -->
       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -148,7 +150,7 @@
 
         <br><br><br><br><br><br>
           <div class="row heading">
-              <img src="amazon.png" alt="Amazon" width="240" height="240">
+              <img src="/static/amazon.png" alt="Amazon" width="240" height="240">
               <br>
               <h1>Convert Review To Rating</h1>
               <br><br>
@@ -161,7 +163,10 @@
         	     </div>
                 <br><br><br>
                 <div class="input-group add-on inputtxt">
-                  <input class="form-control" id="search" size="40" value="Enter Your Review" onFocus="clearText(this)" onBlur="clearText(this)" placeholder="Search" name="srch-term" id="srch-term" type="text">
+                  <input class="form-control" id="search" size="40" value="Enter Your Review" onFocus="clearText(this)"
+                               onBlur="clearText(this)"
+                               placeholder="Enter Your Review"
+                               name="srch-term" id="srch-term" type="text">
                   <div class="input-group-btn">
                     <button onclick="myFunction()" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                   </div>

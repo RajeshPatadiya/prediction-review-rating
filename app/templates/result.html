@@ -5,18 +5,18 @@ function clearText(field){
 if(field.defaultValue == field.value) field.value = '';
 else if(field.value == '') field.value = field.defaultValue;
 }
-
+/*
 function goBack() {
     window.history.back();
 }
-
+*/
 function makeStars(num){
     var stars=document.getElementById('stars');
     for (var i = 0; i < num; i++) {
-      stars.innerHTML=stars.innerHTML+'<img src="star.png" alt="Amazon" width="50" height="50">'
+      stars.innerHTML=stars.innerHTML+'<img src="/static/star.png" alt="Amazon" width="50" height="50">'
     }
     for (var i=num;i<5;i++){
-      stars.innerHTML=stars.innerHTML+'<img src="empty_star.png" alt="Amazon" width="50" height="50">'
+      stars.innerHTML=stars.innerHTML+'<img src="/static/empty_star.png" alt="Amazon" width="50" height="50">'
     }
 }
 
@@ -27,7 +27,9 @@ function makeStars(num){
 <html>
    <head>
       <!-- 부트스트랩 임포트  -->
+      <!--
       <link rel="stylesheet" type="text/css" href="../css/mainpage.css?ver=2">
+      -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
           <!-- Latest compiled and minified CSS -->
       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -127,7 +129,7 @@ function makeStars(num){
 
         <br><br><br><br>
           <div class="row heading">
-              <img src="amazon.png" alt="Amazon" width="170" height="170">
+              <img src="/static/amazon.png" alt="Amazon" width="170" height="170">
               <br>
               <h1>Your Review Rating</h1>
               <br>
@@ -138,9 +140,13 @@ function makeStars(num){
               </div>
               <br><br><br>
               <form class="navbar-form" role="search">
-                <button class="imgbtn">
-                  <img src="back.png" onclick="goBack()" class="back" />
+            <a href="/index">
+                <img src="/static/back.png" class="back imgbtn">
+            </a>
+<!--                <button class="imgbtn">
+                  <img src="/static/back.png" href="/index" class="back" />
                 </button>
+-->
               </form>
               <h1>Try Again!</h1>
           </div>
