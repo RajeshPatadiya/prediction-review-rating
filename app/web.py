@@ -19,8 +19,7 @@ def binary_test(review):
 
 def multiple_test(review):
     tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
-    #I don't know.. the path... pleas help me...
-    tf.flags.DEFINE_string("checkpoint_dir", "model_data", "Checkpoint directory from training run") 
+    tf.flags.DEFINE_string("checkpoint_dir", './meta_data', "Checkpoint directory from training run") 
     tf.flags.DEFINE_boolean("eval_train", False, "Evaluate on all training data")
 
     # Misc Parameters
@@ -33,6 +32,7 @@ def multiple_test(review):
     s = review
     x_raw = [s]
     vocab_path = os.path.join(FLAGS.checkpoint_dir, "vocab")
+    print(vocab_path)
     vocab_processor = learn.preprocessing.VocabularyProcessor.restore(vocab_path)
     x_test = np.array(list(vocab_processor.transform(x_raw)))
     
