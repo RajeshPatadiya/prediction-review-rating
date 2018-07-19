@@ -37,6 +37,7 @@ def setting():
 
     global model
     model = load_model('./review.h5')
+    model.summary()
     global graph
     graph = tf.get_default_graph()
 
@@ -54,7 +55,30 @@ def review_to_wordlist( review, remove_stopwords=True):
     #
     # 3. Optionally remove stop words (True by default)
     if remove_stopwords:
-        stops = set(stopwords.words("english"))
+#        stops = set(stopwords.words("english"))
+        stops = set(['those', 'ourselves', 'off', 'only', 'other', 'very', \
+            're', 'over', 'should', 'mightn', 'then', 'where', 'some', 'aren', \
+            'to', 'couldn', 'theirs', 'mustn', 'our', 'did', 'before', \
+            'himself', 'her', 'needn', "aren't", 'him', 'she', 'he', 'through',\
+            'shan', 'by', 'into', "didn't", 'myself', "should've", "wouldn't",\
+            'if', 'they', 'same', 'wouldn', 'am', 'its', 'which', 'each',\
+            'under', 'is', 'once', 'a', 'out', 'few', 'all', 'do', 'haven',\
+            'an', 'yours', 'while', 'both', 've', 'what', 'ain', 'herself',\
+            'themselves', 'for', 'will', 'have', "mustn't", 'more', 'that',\
+            'ours', 'hers', 'doesn', 'no', 'your', 'just', 'below', 'll','isn',\
+            'has', "don't", 'does', 'don', 'can', 'won', 'in', 'than', 'were',\
+            'didn', "mightn't", "wasn't", 'd', 'against', 'most', 'been',\
+            'during', "shan't", 'this', 'on', 'weren', 'hasn', 'up', 'be',\
+            "it's", 'shouldn', 'these', 'so', 'because', 'm', "isn't",\
+            "doesn't", 'here', 'and', 'we', 'between', 'itself', 'doing','you',\
+            "haven't", 'his', 'after', 'as', 'until', 'own', "shouldn't",\
+            'above', 'or', 'who', 'why', 'nor', 'it', 'again', 'yourselves',\
+            'their', "that'll", "couldn't", "you're", 'how', 'my', 'down', 'o',\
+            'me', 'further', 'whom', 'of', "you'll", "hasn't", 'being', 'i',\
+            'now', 'at', 'the', "hadn't", 'wasn', 'with', 'ma', 'had',\
+            "needn't", 'having', "you'd", 'there', "you've", 't',\
+            'about', 'any', 'such', 'are', "won't", 'y', 'hadn', 'yourself',\
+            's', 'was', 'but', 'too', "she's", "weren't", 'when', 'from', 'them'])
         words = [w for w in words if not w in stops]
 
     b=[]
@@ -72,23 +96,37 @@ def binary_test(review):
 
     # fit "a review" to model input
     review_word_list = review_to_wordlist( review )
-    sequences_test = tokenizer.texts_to_sequences(review_word_list)
+    sequences_test = tokenizer.texts_to_sequences([review])
 
-    X_review = sequence.pad_sequences(sequences_test, maxlen=80)
+#    print(review_word_list)
+    '''
+    print('sequences_test : ', sequences_test)
+    new_seq = []
+    for i in sequences_test:
+        if i:
+            new_seq.append(i[0])
+
+    
+    new_seq = [new_seq]
+    '''
+#    print('sequences_test : ', new_seq)
+    X_review = sequence.pad_sequences(sequences_test, maxlen=30, value = 0)
+#    X_review = sequence.pad_sequences(new_seq, maxlen=30, value = 0)
+    print(X_review.shape)
+    print('X_review : ', X_review)
 
     with graph.as_default():
         y_prob = model.predict(X_review)
         y_class = np.argmax(y_prob, axis=1)
         print('binary test\'s y_prob : ', y_prob)
+        print('y_class : ', y_class[0])
         score = y_class[0]
 
     # 0 or 1, i.e, negative or positive
     return score
 
 def multiple_test(review):
-
     FLAGS = tf.flags.FLAGS
-#    FLAGS._parse_flags()
     
     s = review
     x_raw = [s]
@@ -128,8 +166,6 @@ def multiple_test(review):
                 all_predictions = np.concatenate([all_predictions, batch_predictions])
 
             all_predictions = all_predictions.astype('int32')
-            
-            #I don't know.. to print..u...
             
             print("Predicts : ", all_predictions)
             print("Prediction Type", type(all_predictions[0]))
@@ -175,5 +211,4 @@ def prediction():
     return render_template("result.html", score=score, choice=int(choice))
 
 if __name__ == '__main__':
-#    model = load_model('./review.h5')
     app.run(host='0.0.0.0', port='5000', debug=True)
