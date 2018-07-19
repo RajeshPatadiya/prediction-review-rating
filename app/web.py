@@ -161,18 +161,18 @@ def result_page():
 
 @app.route('/prediction', methods=['GET'])
 def prediction():
-    binary_choice = request.args.get('happy')
+    choice = request.args.get('method')
     review = request.args.get('srch-term')
 
-    if binary_choice == 'Y':
+    if choice == '0':
         score = binary_test(review)
-    elif binary_choice == 'N':
+    elif choice == '1':
         score = multiple_test(review)
     else:
         score = -1
 
     print('score : ', score)
-    return render_template("result.html", score=score)
+    return render_template("result.html", score=score, choice=int(choice))
 
 if __name__ == '__main__':
 #    model = load_model('./review.h5')

@@ -132,21 +132,26 @@ function makeStars(num){
 
   		</style>
 
-   </head>
-   <body>
-      <div class="containe text-center">
-
-        <br><br><br><br>
-          <div class="row heading">
-              <img src="/static/amazon.png" alt="Amazon" width="170" height="170">
-              <br>
-              <h1>Your Review Rating</h1>
-              <br>
-              <div id="stars">
+    </head>
+    <body>
+        <div class="containe text-center">
+            <br><br><br><br>
+            <div class="row heading">
+                <img src="/static/amazon.png" alt="Amazon" width="170" height="170">
+            <br><h1>Your Review Rating</h1><br>
+            {% if choice == 0 %}
+                {% if score == 0 %}
+                <img src="/static/negative.png" width="150" height="150">
+                {% elif score == 1 %}
+                <img src="/static/positive.png" width="150" height="150">
+                {% endif %}
+            {% elif choice == 1 %}
+            <div id="stars">
                 <script>
                     makeStars({{ score }})
                 </script>
-              </div>
+            </div>
+            {% endif %}
               <br><br><br>
               <form class="navbar-form" role="search">
             <a href="/index">

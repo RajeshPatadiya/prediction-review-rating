@@ -176,9 +176,11 @@ h1{
                 <form class="navbar-form" method="get" action="/prediction">
                     <!-- Default unchecked -->
                     <div id="radioBtn" class="btn-group">
-                        <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="Y"> Positive / Negative </a>
-                        <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="N">    Number Rating    </a>
-                        <input type="hidden" name="happy" id="happy" value="Y">
+                        <a class="btn btn-primary btn-sm active"
+                           data-toggle="method" data-title="0"> Positive / Negative </a>
+                        <a class="btn btn-primary btn-sm notActive"
+                           data-toggle="method" data-title="1">    Number Rating    </a>
+                        <input type="hidden" name="method" id="method" value="0">
                     </div>
                     <br><br><br>
                     <div class="input-group add-on inputtxt">
