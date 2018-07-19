@@ -28,7 +28,7 @@ app = Flask(__name__, static_url_path='/static')
 def setting():
     # set tensorflow flags
     tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
-    tf.flags.DEFINE_string("checkpoint_dir", './meta_data', "Checkpoint directory from training run") 
+    tf.flags.DEFINE_string("checkpoint_dir", './model_data', "Checkpoint directory from training run") 
     tf.flags.DEFINE_boolean("eval_train", False, "Evaluate on all training data")
 
     # Misc Parameters
