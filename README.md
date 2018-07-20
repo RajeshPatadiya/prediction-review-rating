@@ -11,7 +11,9 @@ Especially, in order to process texts of CNN that performs image processing, the
 
 ## Requirements
 * Flask for web server
-*
+* Jupyter for running python program and leraning rnn/cnn
+* tensorflow
+* keras
 
 ## Reference Data
 - [Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
@@ -20,12 +22,13 @@ Especially, in order to process texts of CNN that performs image processing, the
 - [rnn vs cnn stackoverflow](https://datascience.stackexchange.com/questions/11619/rnn-vs-cnn-at-a-high-level)
 - kernel
   - https://www.kaggle.com/PromptCloudHQ/amazon-reviews-unlocked-mobile-phones/kernels
-  -
+  - https://www.kaggle.com/ngyptr/lstm-sentiment-analysis-keras
+  - https://www.kaggle.com/kredy10/simple-lstm-for-text-classification
 - papers
   - [Learning Recurrent Neural Networks with Hessian-Free Optimization](http://www.icml-2011.org/papers/532_icmlpaper.pdf)
-  -
+  - [Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf)
 
 ## Team Member
 * Dokyeong Kwon
-* * Seungwoo Park
-* * Taeseung Lee
+* Seungwoo Park
+* Taeseung Lee
