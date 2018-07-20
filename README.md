@@ -1,5 +1,5 @@
 # prediction-review-rating
-## Subtitle : Text Classification using RNN and CNN
+## Subtitle : Text Classification using RNN and CNN with keras and tensorflow
 ## Description
 Based on product reviews, we want to see how a review relates to ratings.
 In this project, a big topic called Text classification is implemented using two models.
@@ -33,21 +33,21 @@ learn cnn or rnn model using dataset.
 
 ## Process and Result of CNN and RNN
 ### CNN
-#### Step1
+1. Step1
 ![cnn_step1](images/cnn_step1.png)
-#### Step2
+2. Step2
 ![cnn_step2](images/cnn_step2.png)
-#### Step3
+3. Step3
 ![cnn_step3](images/cnn_step3.png)
-#### Result
+4. Result
 ![cnn_result](images/cnn_result.png)
 
 ### RNN
-#### Step1
+1. Step1
 ![rnn_step1](images/rnn_step1.png)
-#### Step2
+2. Step2
 ![rnn_step2](images/rnn_step2.png)
-#### Result
+3. Result
 ![rnn_result](images/rnn_result.png)
 
 ## References
@@ -69,3 +69,6 @@ learn cnn or rnn model using dataset.
 * Dokyeong Kwon
 * Seungwoo Park
 * Taeseung Lee
+
+## SlideShare Note
+<https://www.slideshare.net/TaeseungLee1/prediction-of-amazon-review-rating-by-using-amazon-review>
