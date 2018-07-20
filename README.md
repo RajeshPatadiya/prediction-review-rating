@@ -1,4 +1,5 @@
 # prediction-review-rating
+## Subtitle : Text Classification using RNN and CNN
 ## Description
 Based on product reviews, we want to see how a review relates to ratings.
 In this project, a big topic called Text classification is implemented using two models.
@@ -13,6 +14,22 @@ Especially, in order to process texts of CNN that performs image processing, the
 * Jupyter for running python program and leraning rnn/cnn
 * tensorflow
 * keras
+
+## How to use our program
+### Run the Web Application
+```
+$ python3 web.py
+```
+### Must Change!
+1. In app/model/checkout, change a path
+2. paths of dataset
+
+### Learn model
+If you get dataset and model ipynb files and change the path of dataset, you can
+learn cnn or rnn model using dataset.
+
+## Software(or Overall Application) Architecture
+![Architecture](images/architecture.pnh)
 
 ## Process and Result of CNN and RNN
 ### CNN
@@ -38,6 +55,8 @@ Especially, in order to process texts of CNN that performs image processing, the
 - [How to Use Word Embedding Layers for Deep Learning with Keras](https://machinelearningmastery.com/use-word-embedding-layers-deep-learning-keras/)
 - [What optimization methods work best for LSTMs?](https://www.reddit.com/r/MachineLearning/comments/3i6fp9/what_optimization_methods_work_best_for_lstms/)
 - [rnn vs cnn stackoverflow](https://datascience.stackexchange.com/questions/11619/rnn-vs-cnn-at-a-high-level)
+- [CNN text classification Implementation Github](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/)
+- [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)
 - kernel
   - https://www.kaggle.com/PromptCloudHQ/amazon-reviews-unlocked-mobile-phones/kernels
   - https://www.kaggle.com/ngyptr/lstm-sentiment-analysis-keras
