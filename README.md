@@ -1,8 +1,7 @@
 # prediction-review-rating
-- Based on product reviews, we want to see how a review relates to ratings.
-
-## Briefly Description
-- In this project, a big topic called Text classification is implemented using two models.
+## Description
+Based on product reviews, we want to see how a review relates to ratings.
+In this project, a big topic called Text classification is implemented using two models.
 First, we implemented the LSTM model using Keras and train the binary classification. And the CNN model was implemented using Tensorflow to train and test multiple classification.
 We tested the post-learning using LSTM, which is a type of RNN known as a representative text processing model.
 Next, we implemented multiple text classification using CNN, which is mainly used for image processing. 
@@ -17,8 +16,22 @@ Especially, in order to process texts of CNN that performs image processing, the
 
 ## Process of CNN and RNN
 ### CNN
+#### Step1
+![cnn_step1](images/cnn_step1.png)
+#### Step2
+![cnn_step2](images/cnn_step2.png)
+#### Step3
+![cnn_step3](images/cnn_step3.png)
+#### Result
+![cnn_result](images/cnn_result.png)
 
 ### RNN
+#### Step1
+![rnn_step1](images/rnn_step1.png)
+#### Step2
+![rnn_step2](images/rnn_step2.png)
+#### Result
+![rnn_result](images/rnn_result.png)
 
 ## References
 - [Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
