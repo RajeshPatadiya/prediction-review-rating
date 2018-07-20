@@ -29,7 +29,7 @@ If you get dataset and model ipynb files and change the path of dataset, you can
 learn cnn or rnn model using dataset.
 
 ## Software(or Overall Application) Architecture
-![Architecture](images/architecture.pnh)
+![Architecture](images/architecture.png)
 
 ## Process and Result of CNN and RNN
 ### CNN
