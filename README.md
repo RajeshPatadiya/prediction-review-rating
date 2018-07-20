@@ -14,7 +14,7 @@ Especially, in order to process texts of CNN that performs image processing, the
 * tensorflow
 * keras
 
-## Process of CNN and RNN
+## Process and Result of CNN and RNN
 ### CNN
 #### Step1
 ![cnn_step1](images/cnn_step1.png)
