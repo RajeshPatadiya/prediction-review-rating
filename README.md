@@ -15,7 +15,12 @@ Especially, in order to process texts of CNN that performs image processing, the
 * tensorflow
 * keras
 
-## Reference Data
+## Process of CNN and RNN
+### CNN
+
+### RNN
+
+## References
 - [Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
 - [How to Use Word Embedding Layers for Deep Learning with Keras](https://machinelearningmastery.com/use-word-embedding-layers-deep-learning-keras/)
 - [What optimization methods work best for LSTMs?](https://www.reddit.com/r/MachineLearning/comments/3i6fp9/what_optimization_methods_work_best_for_lstms/)
